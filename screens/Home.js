@@ -17,7 +17,7 @@ export default function Home() {
 
       <View className='flex-row pb-3 items-center mx-4 space-x-2 pt-5'>
         <Image
-          source={require('../../assets/img/fit.jpeg')}
+          source={require('../assets/img/fit.jpeg')}
           className='h-20 w-20 bg-gray-300 p-4 rounded-full'
         />
         <Text>Extra Calories</Text>
