@@ -9,13 +9,13 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <TailwindProvider>
+    <TailwindProvider>
+      <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name='Home - Bakal' component={Home} />
+          <Stack.Screen name='Home' component={Home} options={{ title: 'Unli Bakal' }} />
         </Stack.Navigator>
         <Navbar />
-      </TailwindProvider>
-    </NavigationContainer>
+      </NavigationContainer>
+    </TailwindProvider>
   );
 }
