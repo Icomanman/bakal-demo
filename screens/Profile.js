@@ -3,18 +3,15 @@ import React, { useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { UserIcon, SearchIcon } from 'react-native-heroicons/solid';
 
-import Header from '../components/Header';
-
 export default function Profile() {
   const navigation = useNavigation();
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false
     })
-  }, [])
+  }, []);
   return (
     <View>
-      {/* <Header /> */}
       <View className='items-center'>
         <View className='flex-row items-center py-4 mt-2'>
           <Image

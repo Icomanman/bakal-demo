@@ -3,8 +3,6 @@ import React, { useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { UserIcon, SearchIcon } from 'react-native-heroicons/solid';
 
-import Header from '../components/Header';
-
 export default function Home() {
   const navigation = useNavigation();
   useLayoutEffect(() => {
@@ -14,7 +12,6 @@ export default function Home() {
   }, [])
   return (
     <View>
-      {/* <Header /> */}
       <View className='items-center'>
         <View className='flex-1 px-4'>
           <Text className='font-bold text-gray-800 text-xl'>
@@ -22,7 +19,6 @@ export default function Home() {
           </Text>
         </View>
       </View>
-
     </View>
   )
 }
