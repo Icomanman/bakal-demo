@@ -12,13 +12,13 @@ export default function Home() {
     })
   }, [])
   return (
-    <View>
+    <View className='bg-gray-300 w-screen'>
       <View className='items-center'>
         <View className='flex-1 px-4'>
           <Text className='font-bold text-gray-800 text-xl'>
             Welcome home!
           </Text>
-          <ScrollView>
+          <ScrollView className='content-center w-screen'>
             <Post />
           </ScrollView>
         </View>

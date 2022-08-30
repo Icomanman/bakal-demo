@@ -11,7 +11,7 @@ export default function Header() {
       <View className='p-2 bg-gray-900 flex-row'>
         <Pressable className='flex-row pl-2' onPress={() => { pressHome(); nav.navigate('Home') }}>
           <Image source={require('../assets/img/bakal-body.jpg')}
-            className='h-12 w-12 bg-gray-300 rounded-full' />
+            className='h-12 w-12 rounded-full' />
           <View className='justify-center pl-3'>
             <Text className='text-lg text-white font-bold'>Unli Bakal</Text>
           </View>
