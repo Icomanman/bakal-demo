@@ -2,6 +2,7 @@
 import React from 'react';
 import { Image, View, Text, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { UserIcon, SearchIcon } from 'react-native-heroicons/solid';
 
 export default function Header() {
   const nav = useNavigation();

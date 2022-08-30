@@ -1,7 +1,8 @@
-import { Image, Pressable, Text, View } from 'react-native';
+import { Image, Pressable, Text, ScrollView, View } from 'react-native';
 import React, { useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { UserIcon, SearchIcon } from 'react-native-heroicons/solid';
+
+import Post from '../components/Post';
 
 export default function Home() {
   const navigation = useNavigation();
@@ -17,6 +18,9 @@ export default function Home() {
           <Text className='font-bold text-gray-800 text-xl'>
             Welcome home!
           </Text>
+          <ScrollView>
+            <Post />
+          </ScrollView>
         </View>
       </View>
     </View>
