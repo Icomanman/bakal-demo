@@ -15,7 +15,7 @@ export default function Profile() {
       <View className='items-center'>
         <View className='flex-row items-center py-4 mt-2'>
           <Image
-            source={require('../assets/img/fit.jpeg')}
+            source={require('../assets/img/fit.jpg')}
             className='h-20 w-20 bg-gray-300 rounded-full'
           />
         </View>
