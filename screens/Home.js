@@ -1,9 +1,12 @@
 import { ScrollView, View } from 'react-native';
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import Post from '../components/Post';
+import Reload from '../components/Reload';
 import Searchbar from '../components/Searchbar';
+
+import posts from '../dat/posts';
 
 export default function Home() {
   const navigation = useNavigation();
@@ -11,12 +14,17 @@ export default function Home() {
     navigation.setOptions({
       headerShown: false
     })
-  }, [])
+  }, []);
+
+  const content = posts.length > 0 ? posts.map((post, i) => (
+    <Post post={post} key={i} />
+  )) : <Reload />;
+
   return (
     <View className='bg-gray-300 w-full items-center'>
       <Searchbar />
       <ScrollView className='content-center'>
-        <Post />
+        {content}
       </ScrollView>
     </View>
   )
