@@ -12,6 +12,7 @@ const getPosts = () => {
             caption: '',
             comments: {},
             image_url: '../assets/img/fit.jpg',
+            // image_url: 'https://drive.google.com/file/d/1K4ulxgyfxG3pXJyscgXXDG5yV-eWCrZm/view?usp=sharing',
             likes: 53,
             user: 'Tom'
         },

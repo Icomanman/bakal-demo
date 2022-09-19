@@ -6,12 +6,14 @@ const PostHeader = ({ post }) => (
     <Image className='w-14 h-14 rounded-full' source={{ uri: post.image_url }} />
     <Text className='font-bold mx-3'>{post.user}</Text>
     <View className='flex-row flex-grow justify-end'>
-      <Ionicons name="ellipsis-vertical" size={24} color="black" />
+      <Pressable>
+        <Ionicons name="ellipsis-vertical" size={24} color="black" />
+      </Pressable>
     </View>
   </View >
 );
 const PostImage = ({ post }) => (
-  <View>
+  <View className='justify-center'>
     <Image
       className='mb-1 w-96 h-96'
       source={{ uri: post.image_url }}
