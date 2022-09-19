@@ -2,9 +2,13 @@ import { Image, Pressable, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const PostHeader = ({ post }) => (
-  <View className='flex-row'>
-    <Text className='font-bold'>{post.user}</Text>
-  </View>
+  <View className='flex-row my-3 items-center'>
+    <Image className='w-14 h-14 rounded-full' source={{ uri: post.image_url }} />
+    <Text className='font-bold mx-3'>{post.user}</Text>
+    <View className='flex-row flex-grow justify-end'>
+      <Ionicons name="ellipsis-vertical" size={24} color="black" />
+    </View>
+  </View >
 );
 const PostImage = ({ post }) => (
   <View>
