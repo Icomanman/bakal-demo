@@ -12,14 +12,15 @@ const PostHeader = ({ post }) => (
     </View>
   </View >
 );
+
 const PostImage = ({ post }) => (
   <View className='justify-center'>
     <Image
       className='mb-1 w-96 h-96'
       source={{ uri: post.image_url }}
-      style={{ resizeMode: true }}
+      style={{ resizeMode: 'cover' }}
     />
-    <Text>{post.image_url}</Text>
+    <Text>{post.caption}</Text>
   </View>
 );
 const PostFooter = ({ post_dat }) => (
