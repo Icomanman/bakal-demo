@@ -3,12 +3,30 @@ import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 
 const icon_color = 'rgb(17, 24, 39)';
 
-const Comments = ({ post }) => (
-  <View className='flex-row'>
-    <Text className='font-bold mr-1'>{post.user}</Text>
-    <Text>{post.caption}</Text>
-  </View>
-);
+const Comments = ({ comments }) => {
+  const user_comments = [];
+  for (let i = 0; i < comments.length; i++) {
+    user_comments.push(
+      <View className='break-words' key={i}>
+        <Text className=' text-gray-800 mx-1 mb-1'>
+          <Text className='font-bold'>{comments[i].user}</Text>
+          <Text> {comments[i].comment}</Text>
+        </Text>
+      </View>
+    )
+  }
+
+  const comment_header = comments.length > 1 ?
+    <Text className='mx-1 mt-1 text-gray-500'>See all {comments.length} comments</Text> :
+    <Text className='mx-1 mt-1 text-gray-500'>Add comment</Text>
+
+  return (
+    <View className='mx-1'>
+      {comment_header}
+      {user_comments}
+    </View>
+  );
+}
 
 const PostHeader = ({ post }) => (
   <View className='flex-row my-1 items-center'>
@@ -35,27 +53,33 @@ const PostImage = ({ post }) => (
 const PostFooter = ({ post }) => (
   <View>
     <View className='flex-row items-center'>
-      <Pressable className='my-2 ml-3 mr-6'>
+      <Pressable className='my-2 mx-3 justify-center'>
         <FontAwesome5 name="heart" size={24} color={icon_color} />
       </Pressable>
-      <Pressable className='my-2 mr-6'>
+      <Pressable className='my-2 mx-3 justify-center'>
         <FontAwesome5 name="comment" size={24} color={icon_color} />
       </Pressable>
-      <Pressable className='my-2 mr-6'>
+      <Pressable className='my-2 mx-3 justify-center'>
         <FontAwesome5 name="share-square" size={24} color={icon_color} />
       </Pressable>
+      <View className='flex-row flex-grow justify-end mx-3'>
+        <Pressable>
+          <Ionicons name="pint-outline" size={24} color={icon_color} />
+        </Pressable>
+      </View>
     </View>
+
     <View className='mx-2'>
       <Text className='font-bold'>{post.likes} likes</Text>
     </View>
+
     <View className='flex-row mx-2'>
       <Text className='font-bold mr-1'>{post.user}</Text>
       <Text className=''>{post.caption}</Text>
     </View>
-    <View className='m-2'>
-      <Text className='text-gray-500'>Comments</Text>
-      <Comments post={post} />
-    </View>
+
+    <Comments comments={post.comments} />
+
   </View>
 );
 
