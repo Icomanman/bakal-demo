@@ -3,14 +3,24 @@ const getPosts = () => {
     return [
         {
             caption: 'I built this',
-            comments: {},
+            comments: [
+                {
+                    user: '',
+                    comment: ''
+                }
+            ],
             image_url: 'https://i.ibb.co/182bP1y/4k.png',
             likes: 12,
             user: 'Giuliano'
         },
         {
             caption: 'The greatest poet...',
-            comments: {},
+            comments: [
+                {
+                    user: '',
+                    comment: ''
+                }
+            ],
             image_url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fhistory-biography.com%2Fwp-content%2Fuploads%2F2018%2F06%2Fdd.jpg&f=1&nofb=1',
             likes: 53,
             user: 'Tom'
@@ -24,7 +34,9 @@ const getPosts = () => {
         },
         {
             caption: "Don't mess with the chevron stache",
-            comments: {},
+            comments: [
+                {}
+            ],
             image_url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fradioansiaes.pt%2Fwp-content%2Fuploads%2F2020%2F03%2Fdavid-gates-768x399.jpg&f=1&nofb=1',
             likes: 2,
             user: 'Tejas'
@@ -38,7 +50,9 @@ const getPosts = () => {
         },
         {
             caption: "I'm too old for this. ugh",
-            comments: {},
+            comments: [
+                {}
+            ],
             image_url: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.H_2vtF4NsoJe-Ff1QUgZmgAAAA%26pid%3DApi&f=1',
             likes: 0,
             user: 'Alvaro'
