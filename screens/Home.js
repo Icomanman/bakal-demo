@@ -17,8 +17,8 @@ export default function Home() {
   }, []);
 
   const content = posts.length > 0 ? posts.map((post, i) => (
-    <Post post={post} key={i} />
-  )) : <Reload />;
+    <Post post={post} key={i} />)) :
+    <Reload />;
 
   return (
     <View className='bg-white w-full items-center'>

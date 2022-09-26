@@ -33,7 +33,7 @@ const PostHeader = ({ post }) => (
     <Image className='w-12 h-12 rounded-full' source={{ uri: post.image_url }} />
     <Text className='font-bold mx-3 text-md'>{post.user}</Text>
     <View className='flex-row flex-grow justify-end'>
-      <Pressable className='mx-2'>
+      <Pressable className='mx-3'>
         <Ionicons name="ellipsis-vertical" size={18} color="black" />
       </Pressable>
     </View>
@@ -41,9 +41,9 @@ const PostHeader = ({ post }) => (
 );
 
 const PostImage = ({ post }) => (
-  <View className='justify-center'>
+  <View className='justify-center items-center'>
     <Image
-      className='mb-1 w-96 h-96'
+      className='mb-1 w-full h-96'
       source={{ uri: post.image_url }}
       style={{ resizeMode: 'cover' }}
     />
@@ -63,7 +63,7 @@ const PostFooter = ({ post }) => (
         <FontAwesome5 name="share-square" size={24} color={icon_color} />
       </Pressable>
       <View className='flex-row flex-grow justify-end mx-3'>
-        <Pressable>
+        <Pressable className='mx-3'>
           <Ionicons name="pint-outline" size={24} color={icon_color} />
         </Pressable>
       </View>
@@ -84,19 +84,11 @@ const PostFooter = ({ post }) => (
 );
 
 export default function Post({ post }) {
-  // const post-arr = [];
-  // for (let i = 0; i < 16; i++) {
-  //   post_arr.push(
-  //     <Image key={i} source={require('../assets/img/fit.jpg')} className='mb-1 w-96 h-96' />)
-  // };
   return (
     <View className='justify-center'>
       <PostHeader post={post} />
       <PostImage post={post} />
       <PostFooter post={post} />
-      {/* <Pressable> */}
-      {/* {post_arr} */}
-      {/* </Pressable> */}
     </View >
   )
 }
