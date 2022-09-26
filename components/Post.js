@@ -4,11 +4,15 @@ import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 const icon_color = 'rgb(17, 24, 39)';
 
 const Comments = ({ comments }) => {
+  const comment_header = comments.length > 1 ?
+    <Text className='mx-1 mt-1 text-gray-500'>See all {comments.length} comments</Text> :
+    <Text className='mx-1 mt-1 text-gray-500'>Add comment</Text>
+
   const user_comments = [];
   for (let i = 0; i < comments.length; i++) {
     user_comments.push(
       <View className='break-words' key={i}>
-        <Text className=' text-gray-800 mx-1 mb-1'>
+        <Text className=' text-gray-800 m-1'>
           <Text className='font-bold'>{comments[i].user}</Text>
           <Text> {comments[i].comment}</Text>
         </Text>
@@ -16,12 +20,8 @@ const Comments = ({ comments }) => {
     )
   }
 
-  const comment_header = comments.length > 1 ?
-    <Text className='mx-1 mt-1 text-gray-500'>See all {comments.length} comments</Text> :
-    <Text className='mx-1 mt-1 text-gray-500'>Add comment</Text>
-
   return (
-    <View className='mx-1'>
+    <View className='mx-1 mb-2'>
       {comment_header}
       {user_comments}
     </View>
@@ -29,7 +29,7 @@ const Comments = ({ comments }) => {
 }
 
 const PostHeader = ({ post }) => (
-  <View className='flex-row my-1 items-center'>
+  <View className='flex-row my-1 mx-2 items-center'>
     <Image className='w-12 h-12 rounded-full' source={{ uri: post.image_url }} />
     <Text className='font-bold mx-3 text-md'>{post.user}</Text>
     <View className='flex-row flex-grow justify-end'>
