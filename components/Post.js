@@ -27,62 +27,65 @@ const PostImage = ({ post }) => (
 );
 
 const PostFooter = ({ post }) => {
+  // naming comments variable is merely semantics (in context); so as not to get confusing in time: 27 Sep 2022
+  const [comments_arr, setComments] = useState(post.comments);
+  const [comment_btn, setCommentBtn] = useState(false);
   const [likes, setPostLikes] = useState(post.likes);
   const [liked, setLiked] = useState(false);
   const liked_icon = liked ? 'heart-sharp' : 'heart-outline';
 
   // Child Components
-  const CommentInput = ({ pushComment }) => {
+  const CommentInput = ({ pushComment, focus }) => {
     let user_comment = '';
     return (
       <View className='flex-row items-center mx-1'>
         <View className='w-80'>
           <TextInput
+            autoFocus={focus}
             numberOfLines={2}
             placeholder='Add comment...'
             maxLength={160}
             multiline={true}
-            onChangeText={comment => user_comment = comment} />
+            onChangeText={comment => user_comment = comment}
+          />
+          {/* setting state like this looks like a bad practice? 27 Sep 2022 */}
         </View>
         <View className='flex-row flex-grow justify-end'>
           <Pressable className='justify-center mx-3' onPress={() => pushComment(user_comment)}>
-            <Ionicons name="send" size={14} color={icon_color} />
+            <Ionicons name="send-outline" size={20} color={icon_color} />
           </Pressable>
         </View>
       </View>
     )
   };
 
-  const Comments = ({ comments }) => {
-    const [comments_arr, setComments] = useState(comments);
-
-    const updateComments = new_comment => {
-      comments_arr.push({
-        user: 'User',
-        comment: new_comment
-      })
-      setComments(comments_arr);
-    };
-
-    const comment_header = comments_arr.length > 0 ?
-      <Text className='mt-1 mb-1 text-gray-500'>
-        {comments_arr.length} {comments_arr.length === 1 ? 'comment' : 'comments'}
-      </Text> :
-      <CommentInput pushComment={updateComments} />
-    // <Text className='mx-1 mt-1 text-gray-500'>Add comment</Text>
+  const Comments = ({ comments, bubble_pressed }) => {
+    if (bubble_pressed) {
+      var comment_header =
+        <CommentInput
+          pushComment={updateComments}
+          focus={true} />
+    } else {
+      var comment_header = comments.length > 0 ?
+        <Text className='mt-1 mb-1 text-gray-500'>
+          {comments.length} {comments.length === 1 ? 'comment' : 'comments'}
+        </Text> :
+        <CommentInput
+          pushComment={updateComments}
+          focus={false} />
+    }
 
     const user_comments = [];
-    for (let i = 0; i < comments_arr.length; i++) {
+    for (let i = 0; i < comments.length; i++) {
       user_comments.push(
         <View className='break-words' key={i}>
           <Text className=' text-gray-800'>
-            <Text className='font-bold'>{comments_arr[i].user}</Text>
-            <Text> {comments_arr[i].comment}</Text>
+            <Text className='font-bold'>{comments[i].user}</Text>
+            <Text> {comments[i].comment}</Text>
           </Text>
         </View>
       )
     }
-
     return (
       <View className='mx-2 mb-2'>
         {comment_header}
@@ -101,12 +104,22 @@ const PostFooter = ({ post }) => {
     }, 1000);
   };
 
+  const updateComments = new_comment => {
+    const new_comments = comments_arr.map(comment => comment);
+    new_comments.push({
+      user: 'User',
+      comment: new_comment
+    })
+    setComments(new_comments);
+    setCommentBtn(false);
+  };
+
   return (<View>
     <View className='flex-row items-center'>
       <Pressable className='my-2 mx-3 justify-center' onPress={() => updateLikes(!liked)}>
         <Ionicons name={liked_icon} size={24} color={liked ? 'red' : icon_color} />
       </Pressable>
-      <Pressable className='my-2 mx-3 justify-center'>
+      <Pressable className='my-2 mx-3 justify-center' onPress={() => setCommentBtn(!comment_btn)}>
         <FontAwesome5 name="comment" size={24} color={icon_color} />
       </Pressable>
       <Pressable className='my-2 mx-3 justify-center'>
@@ -128,7 +141,7 @@ const PostFooter = ({ post }) => {
       <Text className=''>{post.caption}</Text>
     </View>
 
-    <Comments comments={post.comments} />
+    <Comments comments={comments_arr} bubble_pressed={comment_btn} />
   </View>)
 };
 
