@@ -4,62 +4,6 @@ import { useState } from 'react';
 
 const icon_color = 'rgb(17, 24, 39)';
 
-const CommentInput = ({ comments }) => {
-  const [comment, setComment] = useState();
-  const sendComment = comment => {
-    comments.push({
-      user: 'User',
-      comment: comment
-    })
-    console.log(comment);
-    setComment(comment);
-  };
-  let tmp_input = '';
-  return (
-    <View className='flex-row items-center mx-1'>
-      <View className='w-80'>
-        <TextInput
-          numberOfLines={2}
-          placeholder='Add comment...'
-          maxLength={160}
-          multiline={true}
-          onChangeText={comment => tmp_input = comment} />
-      </View>
-      <View className='flex-row flex-grow justify-end'>
-        <Pressable className='justify-center mx-3' onPress={() => sendComment(tmp_input)}>
-          <Ionicons name="send" size={14} color={icon_color} />
-        </Pressable>
-      </View>
-    </View>
-  )
-};
-
-const Comments = ({ comments }) => {
-  const comment_header = comments.length > 0 ?
-    <Text className='mt-1 mb-1 text-gray-500'>{comments.length} {comments.length === 1 ? 'comment' : 'comments'}</Text> :
-    <CommentInput comments={comments} />
-  // <Text className='mx-1 mt-1 text-gray-500'>Add comment</Text>
-
-  const user_comments = [];
-  for (let i = 0; i < comments.length; i++) {
-    user_comments.push(
-      <View className='break-words' key={i}>
-        <Text className=' text-gray-800'>
-          <Text className='font-bold'>{comments[i].user}</Text>
-          <Text> {comments[i].comment}</Text>
-        </Text>
-      </View>
-    )
-  }
-
-  return (
-    <View className='mx-2 mb-2'>
-      {comment_header}
-      {user_comments}
-    </View>
-  );
-};
-
 const PostHeader = ({ post }) => (
   <View className='flex-row my-1 mx-2 items-center'>
     <Image className='w-12 h-12 rounded-full' source={{ uri: post.image_url }} />
@@ -87,8 +31,67 @@ const PostFooter = ({ post }) => {
   const [liked, setLiked] = useState(false);
   const liked_icon = liked ? 'heart-sharp' : 'heart-outline';
 
-  const [comments, postComment] = useState(post.comments);
+  // Child Components
+  const CommentInput = ({ pushComment }) => {
+    let user_comment = '';
+    return (
+      <View className='flex-row items-center mx-1'>
+        <View className='w-80'>
+          <TextInput
+            numberOfLines={2}
+            placeholder='Add comment...'
+            maxLength={160}
+            multiline={true}
+            onChangeText={comment => user_comment = comment} />
+        </View>
+        <View className='flex-row flex-grow justify-end'>
+          <Pressable className='justify-center mx-3' onPress={() => pushComment(user_comment)}>
+            <Ionicons name="send" size={14} color={icon_color} />
+          </Pressable>
+        </View>
+      </View>
+    )
+  };
 
+  const Comments = ({ comments }) => {
+    const [comments_arr, setComments] = useState(comments);
+
+    const updateComments = new_comment => {
+      comments_arr.push({
+        user: 'User',
+        comment: new_comment
+      })
+      setComments(comments_arr);
+    };
+
+    const comment_header = comments_arr.length > 0 ?
+      <Text className='mt-1 mb-1 text-gray-500'>
+        {comments_arr.length} {comments_arr.length === 1 ? 'comment' : 'comments'}
+      </Text> :
+      <CommentInput pushComment={updateComments} />
+    // <Text className='mx-1 mt-1 text-gray-500'>Add comment</Text>
+
+    const user_comments = [];
+    for (let i = 0; i < comments_arr.length; i++) {
+      user_comments.push(
+        <View className='break-words' key={i}>
+          <Text className=' text-gray-800'>
+            <Text className='font-bold'>{comments_arr[i].user}</Text>
+            <Text> {comments_arr[i].comment}</Text>
+          </Text>
+        </View>
+      )
+    }
+
+    return (
+      <View className='mx-2 mb-2'>
+        {comment_header}
+        {user_comments}
+      </View>
+    );
+  };
+
+  // Methods
   const updateLikes = is_liked => {
     setLiked(is_liked);
     setPostLikes(is_liked ? likes + 1 : post.likes);
@@ -96,10 +99,6 @@ const PostFooter = ({ post }) => {
     setTimeout(() => {
       console.log('POST');
     }, 1000);
-  };
-
-  const updateComments = new_comment => {
-
   };
 
   return (<View>
@@ -129,7 +128,7 @@ const PostFooter = ({ post }) => {
       <Text className=''>{post.caption}</Text>
     </View>
 
-    <Comments comments={comments} />
+    <Comments comments={post.comments} />
   </View>)
 };
 
