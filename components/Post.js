@@ -39,8 +39,9 @@ const PostFooter = ({ post }) => {
     let user_comment = '';
     return (
       <View className='flex-row items-center mx-1'>
-        <View className='w-80'>
+        <View className='align-middle w-80'>
           <TextInput
+            className='align-middle'
             autoFocus={focus}
             numberOfLines={2}
             placeholder='Add comment...'
@@ -59,7 +60,7 @@ const PostFooter = ({ post }) => {
     )
   };
 
-  const Comments = ({ comments, bubble_pressed }) => {
+  const Comments = ({ bubble_pressed, comments, updateComments }) => {
     if (bubble_pressed) {
       var comment_header =
         <CommentInput
@@ -105,12 +106,7 @@ const PostFooter = ({ post }) => {
   };
 
   const updateComments = new_comment => {
-    const new_comments = comments_arr.map(comment => comment);
-    new_comments.push({
-      user: 'User',
-      comment: new_comment
-    })
-    setComments(new_comments);
+    setComments([...comments_arr, { user: 'User', comment: new_comment }]);
     setCommentBtn(false);
   };
 
@@ -141,7 +137,7 @@ const PostFooter = ({ post }) => {
       <Text className=''>{post.caption}</Text>
     </View>
 
-    <Comments comments={comments_arr} bubble_pressed={comment_btn} />
+    <Comments comments={comments_arr} bubble_pressed={comment_btn} updateComments={updateComments} />
   </View>)
 };
 

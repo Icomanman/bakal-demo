@@ -16,6 +16,7 @@ export default function Home() {
     })
   }, []);
 
+  // TODO: add the post to the state of the Home component: 28 Sep 2022
   const content = posts.length > 0 ? posts.map((post, i) => (
     <Post post={post} key={i} />)) :
     <Reload />;
